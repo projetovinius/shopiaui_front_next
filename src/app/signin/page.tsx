@@ -1,45 +1,102 @@
-import Image from "next/image"
-import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
+'use client'
+import * as React from 'react';
+import { Poppins } from 'next/font/google'
+import Box from '@mui/material/Box';
+import TextField from '@mui/material/TextField';
+import { Button, InputAdornment } from '@mui/material';
+import useSigninForm from '@/hooks/useSigninForm';
 
-export default function SigninScreen() {
+  export const poppins = Poppins({
+    subsets: ['latin'],
+    weight: '400',
+  })
+
+  export default function SingUpScreen() {
+
+    const {register, handleSubmit, handleOnSubmit} = useSigninForm()
     return (
-        <div className="overflow-hidden relative">
-            <div className="w-screen h-screen relative z-10">
-                <div className="!overflow-hidden gradient_background z-20"></div>
+      <div className='bg-[url("/Ellipse.Esquerda(12).svg")] bg-contain bg-center flex items-center justify-center w-full h-screen'>
+        <main className=" w-1/2 h-[400px] flex items-center justify-center flex-col gap-8">
+          <div className={poppins.className}>
+            <p className="text-[#324C63] font-bold text-4xl">Conecte-se</p>
+          </div>
+          <div className="flex items-center justify-center flex-row gap-7">
+            <div className="bg-[#324C63] w-40 h-[1px]">
             </div>
-            <div className="fixed top-0 w-screen h-screen z-30">
-                <header className="w-full flex flex-row items-center justify-between px-16">
-                    <ChevronLeftIcon className="text-2xl text-slate-800"/>
-                    <Image src='/Logo.svg' width={200} height={100} alt=""/>
-                </header>
-                <div className="h-full w-full flex items-center justify-center">
-                    <div className="bg-blue-light w-[500px] h-[400px] rounded-3xl flex flex-col px-20 p-6 items-center justify-center">
-                            <div className="w-full h-full">
-                                <label itemID="email_i " className="w-full text-sm">
-                                    E-mail:
-                                    <input
-                                        id="email_i"
-                                        placeholder="Digite seu e-mail..."
-                                        className="w-full border-b-[1px] text-base border-slate-900 pt-2 bg-transparent"
-                                    />
-                                </label>
-                                <label itemID="password_i " className="w-full text-sm">
-                                    Senha:
-                                    <input
-                                        id="password_i"
-                                        placeholder="Digite sua senha..."
-                                        className="w-full border-b-[1px] text-base border-slate-900 pt-2 bg-transparent"
-                                    />
-                                </label>
-                            </div>
-                            <div className="w-full flex justify-center">
-                                <button className="w-[90%] bg-blue-dark ">
-                                    Entrar
-                                </button>
-                            </div>
-                    </div>
-                </div>
+            <div>
+              <p className='text-[#324C63]'>ou</p>
             </div>
-        </div>
+            <div className="bg-[#324C63] w-40 h-[1px]">
+            </div>
+          </div>
+          <div className='w-[60%]'>
+            <Box
+              component={'form'}
+              onSubmit={handleSubmit(handleOnSubmit)}
+              noValidate
+              autoComplete="off"
+              sx={{ display: 'flex', flexDirection: 'column', gap: 6, width: '100%', alignItems: 'center'}} 
+            >
+              <div
+                className='w-full flex flex-col gap-8'
+              >
+                <TextField 
+                  id="email" 
+                  label="Digite seu E-mail" 
+                  variant="outlined" 
+                  fullWidth 
+                  {...register('username')}
+                  sx={{
+                    border: 'none !important',
+                    borderRadius: '10px',
+                    backgroundColor: '#AEBFDC',
+                    boxShadow:
+                        '0px 4px 6px -1px rgba(0, 0, 0, 0.1), 0px 2px 4px -2px rgba(0, 0, 0, 0.06)',
+                  }}
+                  autoComplete="off"
+                />
+                <TextField 
+                  id="senha" 
+                  label="Senha" 
+                  variant="outlined" 
+                  fullWidth 
+                  {...register('password')}
+                  sx={{
+                    border: 'none !important',
+                    borderRadius: '10px !important',
+                    backgroundColor: '#AEBFDC',
+                    boxShadow:
+                        '0px 4px 6px -1px rgba(0, 0, 0, 0.1), 0px 2px 4px -2px rgba(0, 0, 0, 0.06)',
+                  }}
+                  autoComplete="off" 
+                />
+                <div className="w-full justify-end text-[#324C63]"><p className='text-end'>Esqueceu senha?</p></div>
+              </div>
+              <div
+                className='w-full flex flex-col gap-4 items-center justify-center'
+              >
+                <Button
+                  type="submit"
+                  variant="contained" 
+                  color="primary" 
+                  sx={{
+                    backgroundColor: '#FFE069',
+                    width: '50%',
+                    color: '#324C63',
+                    fontSize: '1.2rem',
+                    padding: '8px',
+                    borderRadius: '34px',
+                    fontWeight: '700',
+                    textTransform: 'none'
+                  }}
+                >
+                  Entrar
+                </Button>
+                <p className='text-[#324C63]'>Não possui conta? <span className='font-semibold text-[#324C63]'>Crie aqui</span></p>
+              </div>
+            </Box>
+          </div>
+        </main>
+      </div>
     )
-};
+  }
