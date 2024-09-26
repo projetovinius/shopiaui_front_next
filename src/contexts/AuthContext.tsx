@@ -38,11 +38,12 @@ function AuthProvider({ children }: AuthProviderProps) {
         setIsLoading(true);
         try {
         signinMutation.mutate(data, {
-                onSuccess: (response) => {
-                const accessToken = response?.data?.token;
-                setIsLoading(false);
-                Cookies.set("@authtoken", accessToken);
-                setToken(accessToken);
+            onSuccess: (response) => {
+                    const accessToken = response?.token; 
+                    console.log('Login bem-sucedido:', response); 
+                    
+                    Cookies.set("@authtoken", accessToken);
+                    setToken(accessToken);
             },
             onError: (error) => {
                 console.log(error)
