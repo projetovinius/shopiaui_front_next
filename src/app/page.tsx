@@ -1,10 +1,12 @@
+import Header from "@/components/Header/Header";
 import PrivateRoute from "@/components/PrivateRouter";
 
 
 export default function Home() {
   return (
-    <PrivateRoute>
-      <p></p>
-    </PrivateRoute>
+    <>
+        <Header/>
+        <p>aaaaaaaaaaaa</p>
+    </>
   );
 }
