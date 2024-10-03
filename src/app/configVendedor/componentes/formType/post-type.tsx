@@ -36,7 +36,7 @@ export default function CreatedTypeProduct(){
         })
     }
     return(
-        <form className='w-[1045px] h-[300px]' onSubmit={handleSubmit(handleCreateTypeProduct)}>
+        <form className='w-[1028px] h-[281px]' onSubmit={handleSubmit(handleCreateTypeProduct)}>
           <ThemeProvider theme={theme}>
             <div className=' items-center flex-row ml-[8px] gap-[10px] pt-7'>
             <FormControl sx={{ '& > :not(style)': { m: 1, width: '59ch' } }} >
