@@ -19,7 +19,9 @@ import FormProduto from './componentes/formProduto/post-produto';
 import { Poppins } from 'next/font/google';
 import CreatedTypeProduct from './componentes/formType/post-type';
 import HorizontalLinearStepper from './componentes/progress/progress';
-
+import PersonIcon from '@mui/icons-material/Person';
+import AddBusinessIcon from '@mui/icons-material/AddBusiness';
+import Account from './componentes/contaInfos/user';
 export const poppins = Poppins({
   subsets: ['latin'],
   weight: ['400', '500', '700'],
@@ -33,14 +35,14 @@ interface NavigationItem {
 
 const NAVIGATION: Navigation = [
   {
-    segment: 'dashboard',
-    title: 'Dashboard',
-    icon: <DashboardIcon />,
+    segment: 'conta',
+    title: 'Conta',
+    icon: <PersonIcon />,
   },
   {
-    segment: 'orders',
-    title: 'Orders',
-    icon: <ShoppingCartIcon />,
+    segment: 'postLoja',
+    title: 'Cadastrar Loja',
+    icon: <AddBusinessIcon />,
   },
   {
     kind: 'divider',
@@ -65,11 +67,6 @@ const NAVIGATION: Navigation = [
         icon: <AutoStoriesIcon />,
       },
     ],
-  },
-  {
-    segment: 'integrations',
-    title: 'Integrations',
-    icon: <LayersIcon />,
   },
 ];
 
@@ -113,8 +110,8 @@ function exibContent({ pathname }: { pathname: string }){
       return <div>
           <HorizontalLinearStepper/>
       </div>
-    case 'dashboard':
-        return <CreatedTypeProduct/>;
+    case 'conta':
+        return <Account/>;
       
     case 'produtos/getProdutos':
           return 'Meus Produtos';
@@ -186,7 +183,6 @@ export default function DashboardLayoutBasic(props: DemoProps) {
     };
   }, []);
 
-  // Remove this const when copying and pasting into your project.
   const demoWindow = window !== undefined ? window() : undefined;
 
   return (
@@ -198,8 +194,12 @@ export default function DashboardLayoutBasic(props: DemoProps) {
       router={router}
       theme={demoTheme}
       window={demoWindow}
+      branding={{
+        logo: <img src="/white.png" alt="logo" />,
+        title:'ShoPiauí',
+      }}
     >
-      <DashboardLayout>
+      <DashboardLayout >
         <DemoPageContent pathname={pathname} />
       </DashboardLayout>
     </AppProvider>
