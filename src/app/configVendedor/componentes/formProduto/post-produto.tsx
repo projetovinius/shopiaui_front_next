@@ -79,10 +79,10 @@ export default function FormProduto() {
     }
 
     return (
-        <form onSubmit={handleSubmit(handleCreateProduct)} className='w-[100%] mr-[200px] flex flex-col'>  
+        <form onSubmit={handleSubmit(handleCreateProduct)} className='w-[100%] mr-[200px] flex flex-col pt-7'>  
             <ThemeProvider theme={theme}>
             <div className='flex flex-row'>
-                <Box sx={{ '& > :not(style)': { m: 1,display:'flex',flexDirection:'column' } }}>
+                <div className='flex flex-col items-center justify-center gap-[17px]'>
                 <FormControl sx={{ '& > :not(style)': { m: 1, width: '59ch' } }} >
                     <TextField 
                         id="outlined-basic" 
@@ -99,15 +99,15 @@ export default function FormProduto() {
                         label="Descrição"
                         multiline
                         color='warning'
-                        rows={4}
+                        rows={5}
                         defaultValue=""
                         {...register('description')}
                     />
                 </FormControl>
                 
-                </Box>
+                </div>
                 
-                <Box sx={{ width: '220px', display: 'flex', flexDirection: 'column',marginTop:'8px',gap:'20px'}}>
+                <Box sx={{ width: '220px', display: 'flex', flexDirection: 'column',gap:'26px'}}>
                     <FormControl sx={{ '& > :not(style)': { m: 1, width: '27ch' } }}>
                         <TextField
                             label="Preço do Produto"
