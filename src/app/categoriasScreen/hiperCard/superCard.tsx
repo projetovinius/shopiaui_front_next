@@ -17,12 +17,7 @@ const StyledRating = styled(Rating)( {
   },
 });
 
-interface SuperProps{
-  name:string
-}
-
-
-export default function SuperCard({name}: SuperProps) {
+export default function SuperCard() {
   return (
     <div className="w-[300px] h-[350px] bg-slate-200 rounded hover:scale-105 transition-all duration-3000 cursor-pointer ">
       <div className="relative h-[80%]"> 
@@ -32,7 +27,7 @@ export default function SuperCard({name}: SuperProps) {
           className='object-cover w-full h-[100%] rounded-t' 
         />
       </div>
-        <p className='text-center font-semibold pt-4'>{name}</p>
+        <p className='text-center font-semibold pt-4'>biquine porcelanato</p>
         <div className="w-full flex items-center justify-end p-1 ">
             <StyledRating
               name="customized-color"
