@@ -2,7 +2,7 @@
 import * as React from 'react';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
-import { Button, FormControl, InputAdornment } from '@mui/material';
+import { Button, FormControl, InputAdornment, InputLabel, MenuItem, Select } from '@mui/material';
 import { ThemeProvider } from '@emotion/react';
 import Stack from '@mui/material/Stack';
 import { Poppins } from 'next/font/google';
@@ -24,7 +24,7 @@ const theme = createTheme({
         main:'#324C63'
        },
         warning: {
-            main: '#000000',
+            main: '#000',
         },
         secondary: {
             main: '#FFE069',
@@ -87,6 +87,7 @@ export default function FormProduto() {
                     <TextField 
                         id="outlined-basic" 
                         label="Nome do Produto" 
+                        color='warning'
                         variant="outlined" 
                         {...register('name')}
                     />
@@ -97,6 +98,7 @@ export default function FormProduto() {
                         id="outlined-multiline-static"
                         label="Descrição"
                         multiline
+                        color='warning'
                         rows={4}
                         defaultValue=""
                         {...register('description')}
@@ -105,18 +107,32 @@ export default function FormProduto() {
                 
                 </Box>
                 
-                <Box sx={{ width: '220px', display: 'flex', flexDirection: 'column',marginTop:'8px',gap:'75px'}}>
+                <Box sx={{ width: '220px', display: 'flex', flexDirection: 'column',marginTop:'8px',gap:'20px'}}>
                     <FormControl sx={{ '& > :not(style)': { m: 1, width: '27ch' } }}>
                         <TextField
                             label="Preço do Produto"
                             id="outlined-start-adornment"
+                            color='warning'
                             {...register('price')}
                             InputProps={{
                                 startAdornment: <InputAdornment position="start">$</InputAdornment>,
                             }}
                         />
-                    </FormControl>
 
+                    </FormControl>
+                    <FormControl sx={{ width: '27ch',marginLeft:'7px'}}>
+                    <InputLabel id="demo-simple-select-label">Tipo de Produto</InputLabel>
+                    <Select
+                        labelId="demo-simple-select-label"
+                        id="demo-simple-select"
+                        color='warning'
+                        label="Categoria do Produto"
+                        >
+                        <MenuItem value={10}>Ten</MenuItem>
+                        <MenuItem value={20}>Twenty</MenuItem>
+                        <MenuItem value={30}>Thirty</MenuItem>
+                    </Select>
+                    </FormControl>
                     <FormControl sx={{ '& > :not(style)': { m: 1, width: '27ch' } }}>
                         <TextField 
                             id="outlined-basic" 
@@ -128,28 +144,7 @@ export default function FormProduto() {
                 </Box>
             </div>
             <div>
-             <CreatedTypeProduct/>
             </div>
-                <Stack
-                    spacing={2}
-                    direction="row"
-                    sx={{
-                        display: 'flex',
-                        width: '100%',
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                        marginTop: '10px',
-                    }}
-                >
-                    <Button
-                        color="secondary" 
-                        type='submit'
-                        variant="contained"
-                        sx={{ width: '223px', height: '45px' }} 
-                    >
-                        Cadastrar
-                    </Button>
-                </Stack>
             </ThemeProvider> 
         </form>
     );

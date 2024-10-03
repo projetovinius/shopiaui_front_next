@@ -1,16 +1,26 @@
 "use client"
 import * as React from 'react';
-import { FormControl, InputLabel, MenuItem, Select, TextField } from "@mui/material";
+import { Button, FormControl, InputLabel, MenuItem, Select, Stack, TextField, ThemeProvider } from "@mui/material";
 import {z} from 'zod'
 import {zodResolver} from '@hookform/resolvers/zod'
 import {useForm} from 'react-hook-form'
 import createTypeProduct from '../apis/apiTipoProduto/create-type-product';
+import { createTheme } from '@mui/material';
 
 const createTypeForm = z.object({
 name: z.string().min(1).max(15),
 description: z.string().min(1).max(144) 
 })
-
+const theme = createTheme({
+ palette:{
+  primary:{
+    main:"#000"
+  },
+  secondary:{
+    main:'#FFE069'
+  }
+ }
+})
 type CreateTypeProduct = z.infer<typeof createTypeForm>
 
 export default function CreatedTypeProduct(){
@@ -26,29 +36,21 @@ export default function CreatedTypeProduct(){
         })
     }
     return(
-        <form onSubmit={handleSubmit(handleCreateTypeProduct)}>
-            <div className='flex flex-row ml-4'>
-            <FormControl sx={{ '& > :not(style)': { m: 1, width: '50ch' } }} >
+        <form className='w-[1045px] h-[300px]' onSubmit={handleSubmit(handleCreateTypeProduct)}>
+          <ThemeProvider theme={theme}>
+            <div className=' items-center flex-row ml-[8px] gap-[10px] pt-7'>
+            <FormControl sx={{ '& > :not(style)': { m: 1, width: '59ch' } }} >
                     <TextField 
                         id="outlined-basic" 
-                        label="tipo de Produto" 
+                        label="Tipo de Produto" 
                         variant="outlined" 
+                        color='primary'
                         {...register('name')}
                     />
-                </FormControl>  
-             <FormControl sx={{ width: '27ch',marginLeft:'7px' }}>
-                  <InputLabel id="demo-simple-select-label">Tipo de Produto</InputLabel>
-                  <Select
-                    labelId="demo-simple-select-label"
-                    id="demo-simple-select"
-                    label="Tipo de Produto"
-                    >
-                    <MenuItem value={10}>Ten</MenuItem>
-                    <MenuItem value={20}>Twenty</MenuItem>
-                    <MenuItem value={30}>Thirty</MenuItem>
-                  </Select>
-                </FormControl>
+              </FormControl>
+              <p className='text-slate-500'>Caso ja tenha uma categoria de produto cadastrada clique em prosseguir</p>  
             </div>
+            </ThemeProvider>
         </form>
     )
 }
