@@ -48,7 +48,7 @@ function AuthProvider({ children }: AuthProviderProps) {
                     Cookies.set("@authtoken", accessToken);
                     setToken(accessToken);
                     setUser(user)
-                    router.push('/signup_saller')
+                    router.push('/')
             },
             onError: (error) => {
                 console.log(error)
@@ -63,6 +63,7 @@ function AuthProvider({ children }: AuthProviderProps) {
 
     function logout () {
         Cookies.remove('@authtoken')
+        router.push('/')
     }
 
     const isAuthenticated = !!token
