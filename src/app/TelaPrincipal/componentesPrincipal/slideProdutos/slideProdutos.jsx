@@ -28,7 +28,9 @@ export default function SlideProdutos() {
                 >
                     {data.map((post) => (
                         <SplideSlide key={post.id}>
-                            <Link href={`/produto/${post.id}`}>
+                            {/* <Link href={
+                                `/product_details/${post}`
+                            }> */}
                                 <div className="border rounded-lg shadow-md p-4">
                                     <img
                                         src={'https://radio93fm.com.br/wp-content/uploads/2019/02/produto-585x380.png'}
@@ -38,7 +40,7 @@ export default function SlideProdutos() {
                                     <h3 className="font-semibold text-lg">{post.name}</h3>
                                     <p className="text-gray-700">Preço: R${post.price}</p>
                                 </div>
-                            </Link>
+                            {/* </Link> */}
                         </SplideSlide>
                     ))}
                 </Splide>
