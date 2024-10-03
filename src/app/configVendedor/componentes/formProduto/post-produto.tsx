@@ -9,11 +9,13 @@ import { Poppins } from 'next/font/google';
 import { createTheme } from '@mui/material';
 import {z} from 'zod'
 import {zodResolver} from '@hookform/resolvers/zod'
-import {useForm} from 'react-hook-form'
+import {Controller, useForm} from 'react-hook-form'
 import { createdProduct } from '../apis/apiProduto/create-product';
 import CreatedTypeProduct from '../formType/post-type';
 import { AuthContext } from '@/contexts/AuthContext';
 import useGetCategoriesQuery from '@/hooks/queries/useGetCategoriesQuery';
+import useCreateCategoryForm from '@/hooks/useCreateCategoryForm';
+import useCreateProductForm from '@/hooks/useCreateProductForm';
 
 export const poppins = Poppins({
     subsets: ['latin'],
@@ -54,102 +56,112 @@ const theme = createTheme({
     },
 });
 
-const createdProductForm = z.object({
-    name: z.string().min(1).max(30),
-    description: z.string().min(1).max(144),
-    price: z.number(),
-    quantity: z.number(),
-  })
+// const createdProductForm = z.object({
+//     name: z.string().min(1).max(30),
+//     description: z.string().min(1).max(144),
+//     price: z.number(),
+//     quantity: z.number(),
+//     category_id: z.number(),
+//   })
 
-type CreatedProductForm = z.infer<typeof createdProductForm>
+
+export type CreatedProductForm = {
+    name:string,
+    description: string,
+    price: number,
+    quantity: number,
+    category_id: number
+}
 
 
 
 export default function FormProduto() {
     const {token} = React.useContext(AuthContext)
-    const {data, isLoading} = useGetCategoriesQuery(token)
-    const {register, handleSubmit } = useForm<CreatedProductForm>({
-    resolver: zodResolver(createdProductForm)
-      });
-        
-    async function handleCreateProduct(data: CreatedProductForm ) {
-        console.log('dados recebidos',data)
-        await createdProduct ({
-          name: data.name,
-          description: data.description,
-          price: data.price,
-          quantity: data.quantity
-        })
-    }
+    const {data = [], isLoading} = useGetCategoriesQuery(token)
+    const {register, handleSubmit, control } = useForm<CreatedProductForm>({
+        // resolver: zodResolver(createdProductForm)
+    })
+    const {handleOnSubmit} = useCreateProductForm(token)
 
     return (
-        <form onSubmit={handleSubmit(handleCreateProduct)} className='w-[100%] mr-[200px] flex flex-col pt-7'>  
+        <form onSubmit={handleSubmit(handleOnSubmit)} className='w-[100%] mr-[200px] flex flex-col pt-7'>  
             <ThemeProvider theme={theme}>
-            <div className='flex flex-row'>
+            <div className='flex flex-row w-[90%] justify-between'>
                 <div className='flex flex-col items-center justify-center gap-[17px]'>
-                <FormControl sx={{ '& > :not(style)': { m: 1, width: '59ch' } }} >
-                    <TextField 
-                        id="outlined-basic" 
-                        label="Nome do Produto" 
-                        color='warning'
-                        variant="outlined" 
-                        {...register('name')}
-                    />
-                </FormControl>  
-
-                <FormControl sx={{ '& > :not(style)': { m: 1, width: '59ch' } }}>
-                    <TextField
-                        id="outlined-multiline-static"
-                        label="Descrição"
-                        multiline
-                        color='warning'
-                        rows={5}
-                        defaultValue=""
-                        {...register('description')}
-                    />
-                </FormControl>
-                
-                </div>
-                
-                <Box sx={{ width: '220px', display: 'flex', flexDirection: 'column',gap:'26px'}}>
-                    <FormControl sx={{ '& > :not(style)': { m: 1, width: '27ch' } }}>
-                        <TextField
-                            label="Preço do Produto"
-                            id="outlined-start-adornment"
-                            color='warning'
-                            {...register('price')}
-                            InputProps={{
-                                startAdornment: <InputAdornment position="start">$</InputAdornment>,
-                            }}
-                        />
-
-                    </FormControl>
-                    <FormControl sx={{ width: '27ch',marginLeft:'7px'}}>
-                    <InputLabel id="demo-simple-select-label">Tipo de Produto</InputLabel>
-                    <Select
-                        labelId="demo-simple-select-label"
-                        id="demo-simple-select"
-                        color='warning'
-                        label="Categoria do Produto"
-                        >
-                        <MenuItem value={10}>Ten</MenuItem>
-                        <MenuItem value={20}>Twenty</MenuItem>
-                        <MenuItem value={30}>Thirty</MenuItem>
-                    </Select>
-                    </FormControl>
-                    <FormControl sx={{ '& > :not(style)': { m: 1, width: '27ch' } }}>
+                    <FormControl sx={{ '& > :not(style)': { m: 1, width: '59ch' } }} >
                         <TextField 
                             id="outlined-basic" 
-                            label="Quantidade Disponível" 
+                            label="Nome do Produto" 
+                            color='warning'
                             variant="outlined" 
-                            {...register('quantity')}
+                            {...register('name')}
+                        />
+                    </FormControl>  
+
+                    <FormControl sx={{ '& > :not(style)': { m: 1, width: '59ch' } }}>
+                        <TextField
+                            id="outlined-multiline-static"
+                            label="Descrição"
+                            multiline
+                            color='warning'
+                            rows={5}
+                            defaultValue=""
+                            {...register('description')}
                         />
                     </FormControl>
-                </Box>
-            </div>
-            <div>
-            </div>
+                    
+                    </div>
+                    
+                    <Box sx={{ width: '220px', display: 'flex', flexDirection: 'column',gap:'26px'}}>
+                        <FormControl sx={{ '& > :not(style)': { m: 1, width: '27ch' } }}>
+                            <TextField
+                                label="Preço do Produto"
+                                id="outlined-start-adornment"
+                                color='warning'
+                                {...register('price')}
+                                InputProps={{
+                                    startAdornment: <InputAdornment position="start">$</InputAdornment>,
+                                }}
+                            />
+
+                        </FormControl>
+                        <FormControl sx={{ width: '27ch', marginLeft: '7px' }}>
+                            <InputLabel id="demo-simple-select-label">Tipo de Produto</InputLabel>
+                            <Controller
+                            name="category_id"
+                            control={control}
+                            defaultValue={1}
+                            render={({ field }) => (
+                                <Select
+                                {...field} 
+                                labelId="demo-simple-select-label"
+                                id="demo-simple-select"
+                                color="warning"
+                                label="Categoria do Produto"
+                                >
+                                {data.map((option: any) => (
+                                    <MenuItem key={option.id} value={option.id}>
+                                    {option.name}
+                                    </MenuItem>
+                                ))}
+                                </Select>
+                            )}
+                            />
+                        </FormControl>
+                        <FormControl sx={{ '& > :not(style)': { m: 1, width: '27ch' } }}>
+                            <TextField 
+                                id="outlined-basic" 
+                                label="Quantidade Disponível" 
+                                variant="outlined" 
+                                {...register('quantity')}
+                            />
+                        </FormControl>
+                    </Box>
+                </div>
+                <div>
+                </div>
             </ThemeProvider> 
+            {/* <Button type='submit'>cadastrar</Button> */}
         </form>
     );
 }
