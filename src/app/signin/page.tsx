@@ -92,7 +92,7 @@ import useSigninForm from '@/hooks/useSigninForm';
                 >
                   Entrar
                 </Button>
-                <p className='text-[#324C63]'>Não possui conta? <span className='font-semibold text-[#324C63]'>Crie aqui</span></p>
+                <p className='text-[#324C63]'>Não possui conta? <a href='/singUp' className='font-semibold text-[#324C63]'>Crie aqui</a></p>
               </div>
             </Box>
           </div>
