@@ -20,7 +20,6 @@ import Autocomplete from '@mui/material/Autocomplete';
 import Stack from '@mui/material/Stack';
 import SearchIcon from '@mui/icons-material/Search';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
-import Settings from '@mui/icons-material/Settings';
 import Logout from '@mui/icons-material/Logout';
 import PersonAdd from '@mui/icons-material/PersonAdd';
 import { Open_Sans } from 'next/font/google'
@@ -28,6 +27,8 @@ import {useContext} from 'react'
 import { AuthContext } from '@/contexts/AuthContext';
 import { useRouter } from 'next/navigation';
 import useGetProductsQuery from '@/hooks/queries/useGetProductsQuery';
+import StoreMallDirectoryIcon from '@mui/icons-material/StoreMallDirectory';
+import Link from 'next/link';
 
 export const OpenSans = Open_Sans({
   subsets: ['latin'],
@@ -280,10 +281,14 @@ export default function Header() {
                 Add another account
               </MenuItem>
               <MenuItem onClick={handleClose}>
-                <ListItemIcon>
-                  <Settings fontSize="small" />
-                </ListItemIcon>
-                Settings
+                <Link
+                  href={'/configVendedor'}
+                >
+                  <ListItemIcon>
+                    <StoreMallDirectoryIcon fontSize="small" />
+                  </ListItemIcon>
+                  Ir para loja
+                </Link>
               </MenuItem>
               <MenuItem onClick={logout}>
                 <ListItemIcon>
@@ -300,7 +305,7 @@ export default function Header() {
                 router.push('/signin');
               }}
             sx={{ color: 'white', textTransform: 'none', fontSize: '1rem' }}
-            >Entrar</Button>
+            >Entrar ou Cadastre-se</Button>
           )
         }
       </div>
