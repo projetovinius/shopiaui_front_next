@@ -201,7 +201,7 @@ export default function Header() {
         <div className='w-[30%] text-slate-200 flex flex-row items-center justify-between'>
           <a className='transition-transform duration-300 ease-in-out hover:scale-110' href='/TelaPrincipal'>Home</a>
           <a className='transition-transform duration-300 ease-in-out hover:scale-110' href='#'>Categorias</a>
-          <a className='transition-transform duration-300 ease-in-out hover:scale-110' href='#'>Lojas</a>
+          <a className='transition-transform duration-300 ease-in-out hover:scale-110' href='/construindo'>Lojas</a>
         </div>
         {
           isAuthenticated ? (
