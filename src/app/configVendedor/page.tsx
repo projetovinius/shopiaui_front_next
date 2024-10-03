@@ -18,6 +18,7 @@ import { useMemo } from 'react';
 import FormProduto from './componentes/formProduto/post-produto';
 import { Poppins } from 'next/font/google';
 import CreatedTypeProduct from './componentes/formType/post-type';
+import HorizontalLinearStepper from './componentes/progress/progress';
 
 export const poppins = Poppins({
   subsets: ['latin'],
@@ -110,7 +111,7 @@ function exibContent({ pathname }: { pathname: string }){
   switch(currentSegment){
     case 'produtos/postProdutos':
       return <div>
-          <FormProduto/>
+          <HorizontalLinearStepper/>
       </div>
     case 'dashboard':
         return <CreatedTypeProduct/>;
