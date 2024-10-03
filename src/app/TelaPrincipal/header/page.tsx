@@ -11,7 +11,7 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import InboxIcon from '@mui/icons-material/MoveToInbox';
 import MailIcon from '@mui/icons-material/Mail';
-import MenuIcon from '@mui/icons-material/Menu'; 
+import MenuIcon from '@mui/icons-material/Menu';
 import Image from 'next/image';
 import TextField  from '@mui/material/TextField';
 import { Avatar, createTheme, IconButton, InputAdornment, Menu, MenuItem, Tooltip } from '@mui/material';
@@ -20,7 +20,6 @@ import Autocomplete from '@mui/material/Autocomplete';
 import Stack from '@mui/material/Stack';
 import SearchIcon from '@mui/icons-material/Search';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
-import Settings from '@mui/icons-material/Settings';
 import Logout from '@mui/icons-material/Logout';
 import PersonAdd from '@mui/icons-material/PersonAdd';
 import { Open_Sans } from 'next/font/google'
@@ -28,6 +27,8 @@ import {useContext} from 'react'
 import { AuthContext } from '@/contexts/AuthContext';
 import { useRouter } from 'next/navigation';
 import useGetProductsQuery from '@/hooks/queries/useGetProductsQuery';
+import StoreMallDirectoryIcon from '@mui/icons-material/StoreMallDirectory';
+import Link from 'next/link';
 
 export const OpenSans = Open_Sans({
   subsets: ['latin'],
@@ -50,7 +51,7 @@ const theme = createTheme({
       styleOverrides: {
         root: {
           '& .MuiOutlinedInput-root': {
-            borderRadius: '12px', 
+            borderRadius: '12px',
             '& textarea': {
               minHeight: '10px', // ajusta a altura mínima do textarea
             },
@@ -66,6 +67,22 @@ type Anchor = 'top' | 'left' | 'bottom' | 'right';
 export default function Header() {
   const router = useRouter()
   const {isAuthenticated, logout, token} = useContext(AuthContext)
+<<<<<<< HEAD
+=======
+  function getRandomColor() {
+    const letters = '0123456789ABCDEF';
+    let color = '#';
+    for (let i = 0; i < 6; i++) {
+      color += letters[Math.floor(Math.random() * 16)];
+    }
+    return color;
+  }
+    const [bgColor, setBgColor] = React.useState('#');
+
+    React.useEffect(() => {
+      setBgColor(getRandomColor());
+    }, []);
+>>>>>>> 814838baeb16e3a0bf61723a4f35fb3729043a49
   const { data = [], error, isLoading } = useGetProductsQuery(token);
 
   console.log(data)
@@ -134,21 +151,6 @@ export default function Header() {
     setAnchorEl(null);
   };
 
-  function getRandomColor() {
-    const letters = '0123456789ABCDEF';
-    let color = '#';
-    for (let i = 0; i < 6; i++) {
-      color += letters[Math.floor(Math.random() * 16)];
-    }
-    return color;
-  }
-    const [bgColor, setBgColor] = React.useState('#');
-  
-    React.useEffect(() => {
-      setBgColor(getRandomColor());
-    }, []);
-  
-
   return (
     <div className="bg-[#324C63] w-full h-16 flex items-center justify-start px-4">
       <ThemeProvider theme={theme}>
@@ -183,7 +185,7 @@ export default function Header() {
         <Autocomplete
             id="free-solo-demo"
             freeSolo
-            options={data.map((option: any) => option.name)} 
+            options={data.map((option: any) => option.name)}
             renderInput={(params) => (
               <TextField
                 {...params}
@@ -197,7 +199,7 @@ export default function Header() {
                       height: '10px',
                       paddingBottom: '50px',
                     },
-                  },  
+                  },
                 }}
                 InputProps={{
                   ...params.InputProps,
@@ -210,10 +212,105 @@ export default function Header() {
               />
             )}
           onInputChange={(event, newInputValue) => {
-            console.log(newInputValue);
+            console.log(newInputValue); // Para ver o que está sendo digitado
           }}
         />
         </Stack>
+        {
+          isAuthenticated ? (
+
+          <div className='flex flex-row items-center justify-center gap-6'>
+            <ShoppingCartIcon color='secondary' sx={{fontSize:'27px', cursor:'pointer'}}/>
+            <React.Fragment>
+            <Box sx={{ display: 'flex', alignItems: 'center', textAlign: 'center' }}>
+              <Tooltip title="Account settings">
+                <IconButton
+                  onClick={handleClick}
+                  size="small"
+                  sx={{ ml: 2 }}
+                  aria-controls={open ? 'account-menu' : undefined}
+                  aria-haspopup="true"
+                  aria-expanded={open ? 'true' : undefined}
+                >
+                  <Avatar sx={{ width: 32, height: 32,backgroundColor:bgColor }}>M</Avatar>
+                </IconButton>
+              </Tooltip>
+            </Box>
+            <Menu
+              anchorEl={anchorEl}
+              id="account-menu"
+              open={open}
+              onClose={handleClose}
+              onClick={handleClose}
+              slotProps={{
+                paper: {
+                  elevation: 0,
+                  sx: {
+                    overflow: 'visible',
+                    filter: 'drop-shadow(0px 2px 8px rgba(0,0,0,0.32))',
+                    mt: 1.5,
+                    '& .MuiAvatar-root': {
+                      width: 32,
+                      height: 32,
+                      ml: -0.5,
+                      mr: 1,
+                    },
+                    '&::before': {
+                      content: '""',
+                      display: 'block',
+                      position: 'absolute',
+                      top: 0,
+                      right: 14,
+                      width: 10,
+                      height: 10,
+                      bgcolor: 'background.paper',
+                      transform: 'translateY(-50%) rotate(45deg)',
+                      zIndex: 0,
+                    },
+                  },
+                },
+              }}
+              transformOrigin={{ horizontal: 'right', vertical: 'top' }}
+              anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
+            >
+              <MenuItem onClick={handleClose}>
+                <Avatar /> My account
+              </MenuItem>
+              <Divider />
+              <MenuItem onClick={handleClose}>
+                <ListItemIcon>
+                  <PersonAdd fontSize="small" />
+                </ListItemIcon>
+                Add another account
+              </MenuItem>
+              <MenuItem onClick={handleClose}>
+                <Link
+                  href={'/configVendedor'}
+                >
+                  <ListItemIcon>
+                    <StoreMallDirectoryIcon fontSize="small" />
+                  </ListItemIcon>
+                  Ir para loja
+                </Link>
+              </MenuItem>
+              <MenuItem onClick={logout}>
+                <ListItemIcon>
+                  <Logout fontSize="small" />
+                </ListItemIcon>
+                Logout
+              </MenuItem>
+            </Menu>
+            </React.Fragment>
+          </div>
+          ) : (
+            <Button
+              onClick={() => {
+                router.push('/signin');
+              }}
+            sx={{ color: 'white', textTransform: 'none', fontSize: '1rem' }}
+            >Entrar ou Cadastre-se</Button>
+          )
+        }
       </div>
       </ThemeProvider>
     </div>
