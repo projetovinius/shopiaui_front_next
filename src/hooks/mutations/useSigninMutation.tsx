@@ -11,6 +11,8 @@ function useSigninMutation() {
         },
         onSuccess: (response) => {
             queryClient.invalidateQueries({queryKey: ['user']})
+            console.log('deu certo')
+
             return response
         },
         onError: (error) => {

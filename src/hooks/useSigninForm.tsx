@@ -11,13 +11,15 @@ export default function useSigninForm() {
         handleSubmit,
     } = useForm<SignInProps>();
     
-    const { login, isLoading } = useContext(AuthContext);
+    const { login, isLoading, token } = useContext(AuthContext);
 
     const handleOnSubmit = (data: SignInProps) => {
         console.log(data)
         try {
             console.log(data);
+
             login(data);
+            console.log(token)
         } catch (error) {
             console.error(error);
         }

@@ -45,7 +45,7 @@ import useSigninForm from '@/hooks/useSigninForm';
                   label="Digite seu E-mail" 
                   variant="outlined" 
                   fullWidth 
-                  {...register('username')}
+                  {...register('email')}
                   sx={{
                     border: 'none !important',
                     borderRadius: '10px',

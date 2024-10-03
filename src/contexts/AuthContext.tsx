@@ -1,13 +1,15 @@
 "use client"
-import { SignInProps } from "@/types/auth_signin_model";
+import { SignInProps, UserProps } from "@/types/auth_signin_model";
 import { createContext, ReactNode, useEffect, useState } from "react";
 import Cookies from 'js-cookie'
 import { useSigninMutation } from "@/hooks/mutations/useSigninMutation";
+import { useRouter } from "next/navigation";
 
 interface AuthContextData {
   token: string | null;
   login: (data: SignInProps) => void;
   logout: () => void;
+  user: UserProps | null
   isAuthenticated: boolean;
   isLoading: boolean;
 }
@@ -20,10 +22,10 @@ interface AuthProviderProps {
 
 function AuthProvider({ children }: AuthProviderProps) {
     const [token, setToken] = useState<string | null>(null);
+    const [user, setUser] = useState<UserProps|null>(null)
     const [isLoading, setIsLoading] = useState(false);
-    
     const signinMutation = useSigninMutation();
-
+    const router = useRouter()
     useEffect(()=> {
         const loadTokenAuthetication = async () => {
             const store_token = Cookies.get('@authtoken')
@@ -38,11 +40,15 @@ function AuthProvider({ children }: AuthProviderProps) {
         setIsLoading(true);
         try {
         signinMutation.mutate(data, {
-                onSuccess: (response) => {
-                const accessToken = response?.data?.token;
-                setIsLoading(false);
-                Cookies.set("@authtoken", accessToken);
-                setToken(accessToken);
+            onSuccess: (response) => {
+                    const accessToken = response?.token; 
+                    const user = response?.user; 
+                    console.log('dados do usuário loggado: ', user)
+                    console.log('Login bem-sucedido:', response); 
+                    Cookies.set("@authtoken", accessToken);
+                    setToken(accessToken);
+                    setUser(user)
+                    router.push('/signup_saller')
             },
             onError: (error) => {
                 console.log(error)
@@ -62,13 +68,14 @@ function AuthProvider({ children }: AuthProviderProps) {
     const isAuthenticated = !!token
 
     return(
-        <AuthContext.Provider value={{token, login, logout, isLoading, isAuthenticated}}>
+        <AuthContext.Provider value={{token, user, login, logout, isLoading, isAuthenticated}}>
             {children}
         </AuthContext.Provider>
     )
 }
 export {
     AuthProvider,
-    AuthContext
+    AuthContext, 
+    
 }
     
