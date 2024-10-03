@@ -9,7 +9,7 @@ import CreatedTypeProduct from '../formType/post-type';
 import FormProduto from '../formProduto/post-produto';
 import { Stack } from '@mui/material';
 
-const steps = ['Categoria de produto', 'Informações do Produto', 'Finalizar Cadastro'];
+const steps = ['Categoria de produto', 'Finalizar Cadastro do Produto'];
 
 export default function HorizontalLinearStepper() {
   const [activeStep, setActiveStep] = React.useState(0);
@@ -64,10 +64,6 @@ export default function HorizontalLinearStepper() {
       case 1:
         return <div>
             <FormProduto/>
-         </div>;
-      case 2:
-        return  <div className='w-[1028px] h-[281px]'>
-            
         </div>;
       default:
         return 'Unknown step';
@@ -115,11 +111,6 @@ export default function HorizontalLinearStepper() {
               Back
             </Button>
             <Box sx={{ flex: '1 1 auto' }} />
-            {isStepOptional(activeStep) && (
-              <Button color="inherit" onClick={handleSkip} sx={{ mr: 1 }}>
-                Skip
-              </Button>
-            )}
           <Button 
             type={activeStep === 0 || activeStep === steps.length - 1 ? 'submit' : 'button'}
             onClick={handleNext}

@@ -66,7 +66,19 @@ type Anchor = 'top' | 'left' | 'bottom' | 'right';
 export default function Header() {
   const router = useRouter()
   const {isAuthenticated, logout, token} = useContext(AuthContext)
-
+  function getRandomColor() {
+    const letters = '0123456789ABCDEF';
+    let color = '#';
+    for (let i = 0; i < 6; i++) {
+      color += letters[Math.floor(Math.random() * 16)];
+    }
+    return color;
+  }
+    const [bgColor, setBgColor] = React.useState('#');
+  
+    React.useEffect(() => {
+      setBgColor(getRandomColor());
+    }, []);
   const { data = [], error, isLoading } = useGetProductsQuery(token);
 
   console.log(data)
@@ -216,7 +228,7 @@ export default function Header() {
                   aria-haspopup="true"
                   aria-expanded={open ? 'true' : undefined}
                 >
-                  <Avatar sx={{ width: 32, height: 32 }}>M</Avatar>
+                  <Avatar sx={{ width: 32, height: 32,backgroundColor:bgColor }}>M</Avatar>
                 </IconButton>
               </Tooltip>
             </Box>
