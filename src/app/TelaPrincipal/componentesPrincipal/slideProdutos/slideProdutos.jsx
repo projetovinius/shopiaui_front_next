@@ -26,23 +26,28 @@ export default function SlideProdutos() {
                         fixedHeight: 340
                     }}
                 >
-                    {data.map((post) => (
-                        <SplideSlide key={post.id}>
-                            {/* <Link href={
-                                `/product_details/${post}`
-                            }> */}
-                                <div className="border rounded-lg shadow-md p-4">
-                                    <img
-                                        src={'https://radio93fm.com.br/wp-content/uploads/2019/02/produto-585x380.png'}
-                                        alt={post.name}
-                                        className="h-40 w-full object-cover rounded-md mb-2"
-                                    />
-                                    <h3 className="font-semibold text-lg">{post.name}</h3>
-                                    <p className="text-gray-700">Preço: R${post.price}</p>
-                                </div>
-                            {/* </Link> */}
-                        </SplideSlide>
-                    ))}
+                    {data.map((product) => (
+                        <SplideSlide key={product.id}>
+                                <Link
+                                    href={{
+                                        pathname: `/product_details/${product.id}`,
+                                        query: {
+                                            productData: encodeURIComponent(JSON.stringify(product))
+                                        }
+                                    }}
+                                >
+                                    <div className="border rounded-lg shadow-md p-4">
+                                        <img
+                                            src={'https://radio93fm.com.br/wp-content/uploads/2019/02/produto-585x380.png'}
+                                            alt={product.name}
+                                            className="h-40 w-full object-cover rounded-md mb-2"
+                                        />
+                                        <h3 className="font-semibold text-lg">{product.name}</h3>
+                                        <p className="text-gray-700">Preço: R${product.price}</p>
+                                    </div>
+                                </Link>
+                            </SplideSlide>
+                        ))}
                 </Splide>
             </div>
         </div>
