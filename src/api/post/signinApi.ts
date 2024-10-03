@@ -8,7 +8,8 @@ async function signinApi(data: SignInProps) {
             '/auth/login',
             data
         )
-        return response
+        console.log(response.data)
+        return response.data
     } catch (error) {
         console.error(error)
     }
