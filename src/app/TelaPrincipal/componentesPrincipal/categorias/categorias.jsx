@@ -2,6 +2,8 @@ import { AuthContext } from "@/contexts/AuthContext"
 import useGetCategoriesQuery from "@/hooks/queries/useGetCategoriesQuery"
 import { useContext } from "react"
 import {categoriesData} from "../../../mock/category_mock"
+import Image from "next/image"
+import Link from "next/link"
 
 export default function CategoriasTypes(){
 
@@ -11,8 +13,10 @@ export default function CategoriasTypes(){
             <div className="w-[100%] flex items-center justify-evenly">
                 {
                     categoriesData.map((category) => (
-                            <div className="rounded-full bg-slate-300 w-24 h-24 transition duration-300 transform hover:scale-110 cursor-pointer">{category.name}</div>
-                    ))
+                        <Link href={'/categoriasScreen'}>
+                            <div className="flex items-center flex-col justify-center rounded-full bg-slate-300 w-28 h-28 transition duration-300 transform hover:scale-110 cursor-pointer">
+                                <span><Image src={category.img} width={40} alt='icon' height={40}></Image></span>{category.name}</div>
+                                </Link>  ))
                 }
             </div>
         </div>

@@ -1,6 +1,5 @@
 import { Splide, SplideSlide } from '@splidejs/react-splide';
 import '@splidejs/react-splide/css';
-import Link from 'next/link';
 import { useContext } from 'react';
 import { AuthContext } from '@/contexts/AuthContext';
 import useGetProductsQuery from '@/hooks/queries/useGetProductsQuery';

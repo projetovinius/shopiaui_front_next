@@ -3,25 +3,18 @@ import * as React from 'react';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import { createTheme } from '@mui/material/styles';
-import DashboardIcon from '@mui/icons-material/Dashboard';
-import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
-import LayersIcon from '@mui/icons-material/Layers';
 import { AppProvider } from '@toolpad/core/AppProvider';
 import { DashboardLayout } from '@toolpad/core/DashboardLayout';
 import type { Session, Router, Navigation } from '@toolpad/core';
 import LocalMallIcon from '@mui/icons-material/LocalMall';
-import AddCircleIcon from '@mui/icons-material/AddCircle';
 import AutoStoriesIcon from '@mui/icons-material/AutoStories';
-import ControlPointIcon from '@mui/icons-material/ControlPoint';
 import AddIcon from '@mui/icons-material/Add';
 import { useMemo } from 'react';
-import FormProduto from './componentes/formProduto/post-produto';
 import { Poppins } from 'next/font/google';
-import CreatedTypeProduct from './componentes/formType/post-type';
 import HorizontalLinearStepper from './componentes/progress/progress';
 import PersonIcon from '@mui/icons-material/Person';
 import AddBusinessIcon from '@mui/icons-material/AddBusiness';
-import Account from './componentes/contaInfos/user';
+import Construindo from '../construindo/page'
 export const poppins = Poppins({
   subsets: ['latin'],
   weight: ['400', '500', '700'],
@@ -111,7 +104,7 @@ function exibContent({ pathname }: { pathname: string }){
           <HorizontalLinearStepper/>
       </div>
     case 'conta':
-        return <Account/>;
+        return <Construindo/>;
       
     case 'produtos/getProdutos':
           return 'Meus Produtos';
