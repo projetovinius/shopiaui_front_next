@@ -12,6 +12,8 @@ import {zodResolver} from '@hookform/resolvers/zod'
 import {useForm} from 'react-hook-form'
 import { createdProduct } from '../apis/apiProduto/create-product';
 import CreatedTypeProduct from '../formType/post-type';
+import { AuthContext } from '@/contexts/AuthContext';
+import useGetCategoriesQuery from '@/hooks/queries/useGetCategoriesQuery';
 
 export const poppins = Poppins({
     subsets: ['latin'],
@@ -64,6 +66,8 @@ type CreatedProductForm = z.infer<typeof createdProductForm>
 
 
 export default function FormProduto() {
+    const {token} = React.useContext(AuthContext)
+    const {data, isLoading} = useGetCategoriesQuery(token)
     const {register, handleSubmit } = useForm<CreatedProductForm>({
     resolver: zodResolver(createdProductForm)
       });

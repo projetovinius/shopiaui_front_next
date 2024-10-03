@@ -4,9 +4,10 @@ import { QueryClient, useMutation } from "@tanstack/react-query";
 
 const queryClient = new QueryClient()
 
-export default function useCreateCategoryMutation(token: string) {
+export default function useCreateCategoryMutation(token: string|null) {
     return useMutation({
         mutationFn: (data: CategoriesProps) => {
+            console.log(data, token)
             return createCategoryApi(data, token)
         },
         onSuccess: (response) => {
