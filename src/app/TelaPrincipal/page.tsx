@@ -1,10 +1,10 @@
 "use client"
-import Header from "./header/page"
+import Header from "./componentesPrincipal/header/page"
 import SplideComponent from './componentesPrincipal/slide/slides'
 import CategoriasType from './componentesPrincipal/categorias/categorias'
 import { Open_Sans } from 'next/font/google'
 import SlideProdutos from './componentesPrincipal//slideProdutos/slideProdutos'
-
+import ExibFooter from './componentesPrincipal/footer/footer'
 export const OpenSans = Open_Sans({
   subsets: ['latin'],
   weight: '400',
@@ -25,6 +25,12 @@ export default function TelaPrincipal(){
             <div>
                 <SlideProdutos/>
             </div>
+            <div>
+                
+            </div>
+            <footer>
+                <ExibFooter/>
+            </footer>
         </div>
     )
 }

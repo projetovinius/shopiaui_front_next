@@ -1,26 +1,39 @@
+import Image from "next/image"
+
 export const categoriesData = [
     {
         id:0,
-        name: "Camisas"
+        name: "Calças",
+        img: '/calça.png'
     },
     {
         id:1,
-        name: "Jeans"
+        name: "Jeans",
+        img: '/jeans.png'
+
     },
     {
         id:2,
-        name: "Shorts"
+        name: "Shorts",
+        img: '/Short.png'
+
     },
     {
         id:3,
-        name: "Moletons"
+        name: "Moletons",
+        img: '/moletom.png'
+
     },
     {
         id:4,
-        name: "Sports"
+        name: "Sports",
+        img: '/sport.png'
+        
     },
     {
         id:5,
-        name: "Calçados"
+        name: "Camisas",
+        img: '/camisa.png'
+
     }
 ]

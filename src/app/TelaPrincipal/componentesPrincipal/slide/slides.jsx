@@ -15,10 +15,10 @@ export default function SplideComponent(){
             }}
             >
               <SplideSlide >
-                <div className='bg-[url("/art.jpg")] w-full h-[440px] bg-cover bg-center bg-no-repeat'></div>
+                <div className='bg-[url("/lojas.jpg")] w-full h-[440px] bg-cover bg-center bg-no-repeat'></div>
               </SplideSlide>
               <SplideSlide >
-              <div className='bg-[url("/horse.jpg")] w-full h-[440px] bg-cover bg-center bg-no-repeat'></div>
+              <div className='bg-[url("/ropes.jpg")] w-full h-[440px] bg-cover bg-center bg-no-repeat'></div>
               </SplideSlide>
         </Splide>
     )

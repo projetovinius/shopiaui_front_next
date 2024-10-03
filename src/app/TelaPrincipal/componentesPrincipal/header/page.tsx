@@ -67,8 +67,7 @@ type Anchor = 'top' | 'left' | 'bottom' | 'right';
 export default function Header() {
   const router = useRouter()
   const {isAuthenticated, logout, token} = useContext(AuthContext)
-<<<<<<< HEAD
-=======
+
   function getRandomColor() {
     const letters = '0123456789ABCDEF';
     let color = '#';
@@ -82,7 +81,6 @@ export default function Header() {
     React.useEffect(() => {
       setBgColor(getRandomColor());
     }, []);
->>>>>>> 814838baeb16e3a0bf61723a4f35fb3729043a49
   const { data = [], error, isLoading } = useGetProductsQuery(token);
 
   console.log(data)
@@ -154,23 +152,7 @@ export default function Header() {
   return (
     <div className="bg-[#324C63] w-full h-16 flex items-center justify-start px-4">
       <ThemeProvider theme={theme}>
-        <div className='w-[30%] flex flex-row items-center justify-baseline'>
-          <div>
-            {(['left'] as const).map((anchor) => (
-              <React.Fragment key={anchor}>
-                <Button onClick={toggleDrawer(anchor, true)}>
-                  <MenuIcon sx={{color:'white',fontSize:'29px'}}/>
-                </Button>
-                <Drawer
-                  anchor={anchor}
-                  open={state[anchor]}
-                  onClose={toggleDrawer(anchor, false)}
-                >
-                  {list(anchor)}
-                </Drawer>
-              </React.Fragment>
-            ))}
-          </div>
+        <div className='w-[15%] flex flex-row items-center justify-baseline'>
           <div className='mt-1 ml-2'>
             <Image
             src='/Logo.png'
@@ -180,7 +162,7 @@ export default function Header() {
             />
           </div>
         </div>
-      <div className='w-[70%] flex flex-row items-center justify-between'>
+      <div className='w-[85%] flex flex-row items-center justify-between'>
         <Stack spacing={2} sx={{ width: '60ch' }}>
         <Autocomplete
             id="free-solo-demo"
@@ -216,6 +198,11 @@ export default function Header() {
           }}
         />
         </Stack>
+        <div className='w-[30%] text-slate-200 flex flex-row items-center justify-between'>
+          <a className='transition-transform duration-300 ease-in-out hover:scale-110' href='/TelaPrincipal'>Home</a>
+          <a className='transition-transform duration-300 ease-in-out hover:scale-110' href='#'>Categorias</a>
+          <a className='transition-transform duration-300 ease-in-out hover:scale-110' href='#'>Lojas</a>
+        </div>
         {
           isAuthenticated ? (
 
@@ -303,12 +290,11 @@ export default function Header() {
             </React.Fragment>
           </div>
           ) : (
-            <Button
-              onClick={() => {
-                router.push('/signin');
-              }}
-            sx={{ color: 'white', textTransform: 'none', fontSize: '1rem' }}
-            >Entrar ou Cadastre-se</Button>
+           <div className='flex items-center justify-center flex-col mr-6'>
+            <p className='flex items-center justify-center flex-col'><span className='text-slate-400'><Link href={'/signin'} className='text-white cursor-pointer font-medium transition duration-200 ease-linear hover:text-slate-300'>
+            Entre</Link> ou</span>
+             <span><Link href={'/singUp'} className='text-white cursor-pointer font-medium transition duration-200 ease-linear hover:text-slate-300'>Cadastre-se</Link></span></p>
+           </div>
           )
         }
       </div>

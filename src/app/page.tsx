@@ -1,6 +1,6 @@
 "use client"
 // import Header from "./header/page"
-import Header from './TelaPrincipal/header/page'
+import Header from './TelaPrincipal/componentesPrincipal/header/page'
 import SplideComponent from './TelaPrincipal/componentesPrincipal/slide/slides'
 import CategoriasType from './TelaPrincipal/componentesPrincipal/categorias/categorias'
 import { Open_Sans } from 'next/font/google'
