@@ -11,7 +11,6 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import InboxIcon from '@mui/icons-material/MoveToInbox';
 import MailIcon from '@mui/icons-material/Mail';
-import MenuIcon from '@mui/icons-material/Menu';
 import Image from 'next/image';
 import TextField  from '@mui/material/TextField';
 import { Avatar, createTheme, IconButton, InputAdornment, Menu, MenuItem, Tooltip } from '@mui/material';
@@ -27,9 +26,9 @@ import {useContext} from 'react'
 import { AuthContext } from '@/contexts/AuthContext';
 import { useRouter } from 'next/navigation';
 import useGetProductsQuery from '@/hooks/queries/useGetProductsQuery';
-import StoreMallDirectoryIcon from '@mui/icons-material/StoreMallDirectory';
 import Link from 'next/link';
-
+import ManageAccountsIcon from '@mui/icons-material/ManageAccounts';
+import SettingsIcon from '@mui/icons-material/Settings';
 export const OpenSans = Open_Sans({
   subsets: ['latin'],
   weight: '400',
@@ -279,9 +278,9 @@ export default function Header() {
                   href={'/configVendedor'}
                 >
                   <ListItemIcon>
-                    <StoreMallDirectoryIcon fontSize="small" />
+                    <SettingsIcon fontSize="small" />
                   </ListItemIcon>
-                  Ir para loja
+                  Settings
                 </Link>
               </MenuItem>
               <MenuItem onClick={logout}>

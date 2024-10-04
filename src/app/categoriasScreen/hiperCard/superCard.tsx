@@ -4,7 +4,6 @@ import { styled } from '@mui/system';
 import Rating from '@mui/material/Rating';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
-import Image from 'next/image';
 
 interface Product {
   id: number;
@@ -31,19 +30,7 @@ const SuperCard: React.FC<SuperCardProps> = ({ product }) => {
   console.log(product.imageUrl)
   return (
     <div className="w-[300px] h-[350px] bg-slate-200 rounded hover:scale-105 transition-all duration-3000 cursor-pointer ">
-      <div className="relative h-[80%]"> 
-        {
-          product.imageUrl && (
-            <Image
-              src={product.imageUrl}
-              width={100}
-              height={100}
-              alt='aaaaaaaaaaah'
-              className="object-cover w-full h-[100%] rounded-t" 
-            />
-
-          )
-        } 
+      <div className="relative h-[75%]"> 
         <img
           src={product.imageUrl} 
           alt={product.name}  
@@ -52,7 +39,7 @@ const SuperCard: React.FC<SuperCardProps> = ({ product }) => {
       </div>
       <p className="text-center font-semibold pt-4">{product.name}</p> 
       <p className="text-center text-sm text-gray-500">R$ {product.price.toFixed(2)}</p> 
-      <div className="w-full flex items-center justify-end p-1 ">
+      <div className="w-full flex items-center justify-end pr-2 ">
         <StyledRating
           name="customized-color"
           defaultValue={0}
