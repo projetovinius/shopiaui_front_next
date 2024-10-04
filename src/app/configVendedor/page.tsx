@@ -14,6 +14,8 @@ import { Poppins } from 'next/font/google';
 import HorizontalLinearStepper from './componentes/progress/progress';
 import PersonIcon from '@mui/icons-material/Person';
 import AddBusinessIcon from '@mui/icons-material/AddBusiness';
+import Account from './componentes/contaInfos/user';
+import ProductSaller from '../products_saller/page';
 import Construindo from '../construindo/page'
 export const poppins = Poppins({
   subsets: ['latin'],
@@ -55,7 +57,7 @@ const NAVIGATION: Navigation = [
         icon: <AddIcon />,
       },
       {
-        segment: 'getProdutos',
+        segment: 'products_saller',
         title: 'Meus Produtos',
         icon: <AutoStoriesIcon />,
       },
@@ -106,8 +108,8 @@ function exibContent({ pathname }: { pathname: string }){
     case 'conta':
         return <Construindo/>;
       
-    case 'produtos/getProdutos':
-          return 'Meus Produtos';
+    case 'produtos/products_saller':
+          return <ProductSaller/>; 
       
       default:
        return 'pagina não encontrada'
