@@ -22,6 +22,7 @@ import HorizontalLinearStepper from './componentes/progress/progress';
 import PersonIcon from '@mui/icons-material/Person';
 import AddBusinessIcon from '@mui/icons-material/AddBusiness';
 import Account from './componentes/contaInfos/user';
+import ProductSaller from '../products_saller/page';
 export const poppins = Poppins({
   subsets: ['latin'],
   weight: ['400', '500', '700'],
@@ -62,7 +63,7 @@ const NAVIGATION: Navigation = [
         icon: <AddIcon />,
       },
       {
-        segment: 'getProdutos',
+        segment: 'products_saller',
         title: 'Meus Produtos',
         icon: <AutoStoriesIcon />,
       },
@@ -113,8 +114,8 @@ function exibContent({ pathname }: { pathname: string }){
     case 'conta':
         return <Account/>;
       
-    case 'produtos/getProdutos':
-          return 'Meus Produtos';
+    case 'produtos/products_saller':
+          return <ProductSaller/>; 
       
       default:
        return 'pagina não encontrada'

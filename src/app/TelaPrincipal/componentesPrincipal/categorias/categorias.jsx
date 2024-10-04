@@ -11,7 +11,9 @@ export default function CategoriasTypes(){
             <div className="w-[100%] flex items-center justify-evenly">
                 {
                     categoriesData.map((category) => (
-                            <div className="rounded-full bg-slate-300 w-24 h-24 transition duration-300 transform hover:scale-110 cursor-pointer">{category.name}</div>
+                            <div className="rounded-full bg-slate-300 w-24 h-24 transition duration-300 transform hover:scale-110 cursor-pointer">
+                                {category.name}
+                            </div>
                     ))
                 }
             </div>
