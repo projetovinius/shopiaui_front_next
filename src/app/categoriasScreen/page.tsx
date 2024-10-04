@@ -19,23 +19,22 @@ export const OpenSans = Open_Sans({
 });
 
 const mockProducts = [
-    { id: 1, name: 'Camisa da Nike', price: 70.00, category: 'Camisas', imageUrl: "../../../public/camisa2.png" },
-    { id: 1, name: 'Camisa Ranço', price: 50.00, category: 'Camisas', imageUrl: "../../../public/camisa3.png" },
-    { id: 1, name: 'Camisa do Gojo', price: 60.00, category: 'Camisas', imageUrl: "../../../public/camisa4.png" },
-    { id: 1, name: 'Camisa Social', price: 50.00, category: 'Camisas', imageUrl: "../../../public/camisa1.png" },
-    { id: 1, name: 'Calça Cargo Militar', price: 80.00, category: 'Jeans', imageUrl: "../../../public/calca1.png" },
-    { id: 1, name: 'Calça Jeans rasgada', price: 150.00, category: 'Jeans', imageUrl: "../../../public/calca2.png" },
-    { id: 1, name: 'Calça Berge', price: 70.00, category: 'Jeans', imageUrl: "../../../public/calca3.png" },
-    { id: 1, name: 'Calça Free Fire', price: 210.00, category: 'Jeans', imageUrl: "../../../public/calca4.png" },
-    { id: 1, name: 'Jaqueta Jeans', price: 50.00, category: 'Jeans', imageUrl: "../../../public/jeans2.png" },
-    { id: 1, name: 'Calça Baggy Jeans', price: 50.00, category: 'Jeans', imageUrl: "../../../public/jeans.png" },
-    { id: 1, name: 'Jaqueta Jeans Preta', price: 150.00, category: 'Jeans', imageUrl: "../../../public/jeans3.png" },
-    { id: 1, name: 'Moletom Rosa', price: 40.00, category: 'Moletom', imageUrl: "../../../public/moletom3.png" },
-    { id: 1, name: 'Moletom infatil', price: 50.00, category: 'Moletom', imageUrl: "../../../public/moletom4.png" },
-    { id: 1, name: 'Moletom Preto', price: 70.00, category: 'Moletom', imageUrl: "../../../public/moletom2.png" },
-    { id: 1, name: 'Moletom Branco', price: 50.00, category: 'Moletom', imageUrl: "../../../public/camisa2.png" },
-
+    { id: 1, name: 'Camisa da Nike', price: 70.00, category: 'Camisas', imageUrl: "/Clothes/camisa2.png" },
+    { id: 2, name: 'Camisa Ranço', price: 50.00, category: 'Camisas', imageUrl: "/Clothes/camisa3.png" },
+    { id: 3, name: 'Camisa do Gojo', price: 60.00, category: 'Camisas', imageUrl: "/Clothes/camisa4.png" },
+    { id: 4, name: 'Camisa Social', price: 50.00, category: 'Camisas', imageUrl: "/Clothes/camisa1.png" },
+    { id: 5, name: 'Calça Cargo Militar', price: 80.00, category: 'Jeans', imageUrl: "/Clothes/calca1.png" },
+    { id: 6, name: 'Calça Jeans rasgada', price: 150.00, category: 'Jeans', imageUrl: "/Clothes/calca2.png" },
+    { id: 7, name: 'Calça Berge', price: 70.00, category: 'Jeans', imageUrl: "/Clothes/calca3.png" },
+    { id: 8, name: 'Calça Free Fire', price: 210.00, category: 'Jeans', imageUrl: "/Clothes/calca4.png" },
+    { id: 9, name: 'Jaqueta Jeans', price: 50.00, category: 'Jeans', imageUrl: "/Clothes/jeans2.png" },
+    { id: 10, name: 'Calça Baggy Jeans', price: 50.00, category: 'Jeans', imageUrl: "/Clothes/jeans.png" },
+    { id: 11, name: 'Jaqueta Jeans Preta', price: 150.00, category: 'Jeans', imageUrl: "/Clothes/jeans3.png" },
+    { id: 12, name: 'Moletom Rosa', price: 40.00, category: 'Moletom', imageUrl: "/Clothes/moletom3.png" },
+    { id: 13, name: 'Moletom infatil', price: 50.00, category: 'Moletom', imageUrl: "/Clothes/moletom4.png" },
+    { id: 14, name: 'Moletom Preto', price: 50.00, category: 'Moletom', imageUrl: "/Clothes/moletom2.png" },
 ];
+
 
 export default function Categorie() {
     const [selectedCategories, setSelectedCategories] = React.useState<string[]>([]);
@@ -144,7 +143,7 @@ export default function Categorie() {
                     </div>
                 </div>
                 <div className="flex-1">
-                    <div className="grid grid-cols-3 gap-10">
+                    <div className="grid grid-cols-3 gap-6">
                         {filteredProducts.map((product) => (
                             <SuperCard key={product.id} product={product} />
                         ))}

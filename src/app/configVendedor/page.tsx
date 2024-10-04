@@ -17,6 +17,8 @@ import AddBusinessIcon from '@mui/icons-material/AddBusiness';
 import Account from './componentes/contaInfos/user';
 import ProductSaller from '../products_saller/page';
 import Construindo from '../construindo/page'
+import { AuthContext } from '@/contexts/AuthContext';
+import { useRouter } from 'next/navigation';
 export const poppins = Poppins({
   subsets: ['latin'],
   weight: ['400', '500', '700'],
@@ -143,9 +145,9 @@ interface DemoProps {
 
 export default function DashboardLayoutBasic(props: DemoProps) {
   const { window } = props;
-
+  const routers = useRouter()
   const [pathname, setPathname] = React.useState('/singUp');
-
+  const {user} = React.useContext(AuthContext)
   const router = React.useMemo<Router>(() => {
     return {
       pathname,
@@ -155,8 +157,8 @@ export default function DashboardLayoutBasic(props: DemoProps) {
   }, [pathname]);
   const [session, setSession] = React.useState<Session | null>({
     user: {
-      name: 'Bharat Kashyap',
-      email: 'bharatkashyap@outlook.com',
+      name: 'Undefined',
+      email: user?.email,
       image: 'https://avatars.githubusercontent.com/u/19550456',
     },
   });
@@ -164,17 +166,11 @@ export default function DashboardLayoutBasic(props: DemoProps) {
   const authentication = React.useMemo(() => {
     return {
       signIn: () => {
-        setSession({
-          user: {
-            name: 'Bharat Kashyap',
-            email: 'bharatkashyap@outlook.com',
-            image: 'https://avatars.githubusercontent.com/u/19550456',
-          },
-        });
+        routers.push('/signin')
       },
       signOut: () => {
         setSession(null);
-      },
+      },  
     };
   }, []);
 
