@@ -3,6 +3,7 @@ import '@splidejs/react-splide/css';
 import { useContext } from 'react';
 import { AuthContext } from '@/contexts/AuthContext';
 import useGetProductsQuery from '@/hooks/queries/useGetProductsQuery';
+import Link from 'next/link';
 
 export default function SlideProdutos() {
     const { token } = useContext(AuthContext);

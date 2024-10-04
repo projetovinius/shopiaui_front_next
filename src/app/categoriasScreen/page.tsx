@@ -1,150 +1,156 @@
-"use client"
+"use client";
 import * as React from 'react';
-import Header from "../TelaPrincipal/componentesPrincipal/header/page"
+import Header from "../TelaPrincipal/componentesPrincipal/header/page";
 import Accordion from '@mui/material/Accordion';
 import AccordionSummary from '@mui/material/AccordionSummary';
 import AccordionDetails from '@mui/material/AccordionDetails';
 import Typography from '@mui/material/Typography';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import FormGroup from '@mui/material/FormGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
 import SuperCard from "./hiperCard/superCard";
-import TextField  from '@mui/material/TextField';
-import { Avatar, createTheme, IconButton, InputAdornment, Menu, MenuItem, Tooltip } from '@mui/material';
-import Autocomplete from '@mui/material/Autocomplete';
-import Stack from '@mui/material/Stack';
+import { Open_Sans } from 'next/font/google';
+import { Stack, Autocomplete, TextField, InputAdornment } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
-import { Open_Sans } from 'next/font/google'
-import {useContext} from 'react'
-import { AuthContext } from '@/contexts/AuthContext';
-import useGetProductsQuery from '@/hooks/queries/useGetProductsQuery';
-
 
 export const OpenSans = Open_Sans({
     subsets: ['latin'],
     weight: '400',
-  })
-  
-export default function Categorie(){
-    const {isAuthenticated, logout, token} = React.useContext(AuthContext)
-  
-    function getRandomColor() {
-      const letters = '0123456789ABCDEF';
-      let color = '#';
-      for (let i = 0; i < 6; i++) {
-        color += letters[Math.floor(Math.random() * 16)];
-      }
-      return color;
-    }
-      const [bgColor, setBgColor] = React.useState('#');
-  
-      React.useEffect(() => {
-        setBgColor(getRandomColor());
-      }, []);
-    const { data = [], error, isLoading } = useGetProductsQuery(token);
-  
-    console.log(data)
+});
 
+const mockProducts = [
+    { id: 1, name: 'Camisa da Nike', price: 70.00, category: 'Camisas', imageUrl: "../../../public/camisa2.png" },
+    { id: 1, name: 'Camisa Ranço', price: 50.00, category: 'Camisas', imageUrl: "../../../public/camisa3.png" },
+    { id: 1, name: 'Camisa do Gojo', price: 60.00, category: 'Camisas', imageUrl: "../../../public/camisa4.png" },
+    { id: 1, name: 'Camisa Social', price: 50.00, category: 'Camisas', imageUrl: "../../../public/camisa1.png" },
+    { id: 1, name: 'Calça Cargo Militar', price: 80.00, category: 'Jeans', imageUrl: "../../../public/calca1.png" },
+    { id: 1, name: 'Calça Jeans rasgada', price: 150.00, category: 'Jeans', imageUrl: "../../../public/calca2.png" },
+    { id: 1, name: 'Calça Berge', price: 70.00, category: 'Jeans', imageUrl: "../../../public/calca3.png" },
+    { id: 1, name: 'Calça Free Fire', price: 210.00, category: 'Jeans', imageUrl: "../../../public/calca4.png" },
+    { id: 1, name: 'Jaqueta Jeans', price: 50.00, category: 'Jeans', imageUrl: "../../../public/jeans2.png" },
+    { id: 1, name: 'Calça Baggy Jeans', price: 50.00, category: 'Jeans', imageUrl: "../../../public/jeans.png" },
+    { id: 1, name: 'Jaqueta Jeans Preta', price: 150.00, category: 'Jeans', imageUrl: "../../../public/jeans3.png" },
+    { id: 1, name: 'Moletom Rosa', price: 40.00, category: 'Moletom', imageUrl: "../../../public/moletom3.png" },
+    { id: 1, name: 'Moletom infatil', price: 50.00, category: 'Moletom', imageUrl: "../../../public/moletom4.png" },
+    { id: 1, name: 'Moletom Preto', price: 70.00, category: 'Moletom', imageUrl: "../../../public/moletom2.png" },
+    { id: 1, name: 'Moletom Branco', price: 50.00, category: 'Moletom', imageUrl: "../../../public/camisa2.png" },
 
-    const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
-    const open = Boolean(anchorEl);
-    const handleClick = (event: React.MouseEvent<HTMLElement>) => {
-      setAnchorEl(event.currentTarget);
+];
+
+export default function Categorie() {
+    const [selectedCategories, setSelectedCategories] = React.useState<string[]>([]);
+    const [searchTerm, setSearchTerm] = React.useState<string>('');
+
+    const handleCategoryChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        const category = event.target.name;
+        setSelectedCategories((prev) =>
+            event.target.checked ? [...prev, category] : prev.filter((cat) => cat !== category)
+        );
     };
-    const handleClose = () => {
-      setAnchorEl(null);
-    };
-    return(
-    <div className={OpenSans.className}>
-        <header>
-            <Header/>
-        </header>
-        <div className="flex flex-row mt-8 ml-8 gap-5">
-            <div className="w-[25%] h-[100%]">
+
+    const filteredProducts = mockProducts.filter((product) => {
+        const categoryMatch = selectedCategories.length === 0 || selectedCategories.includes(product.category);
+        const searchMatch = product.name.toLowerCase().includes(searchTerm.toLowerCase());
+        return categoryMatch && searchMatch;
+    });
+
+    return (
+        <div className={OpenSans.className}>
+            <header>
+                <Header />
+            </header>
+            <div className="flex flex-row mt-8 ml-8 gap-5">
+                <div className="w-[25%] h-[100%]">
                     <div>
-                    <Accordion defaultExpanded>
-                        <AccordionSummary
-                        expandIcon={<ExpandMoreIcon />}
-                        aria-controls="panel1-content"
-                        id="panel1-header"
-                        >
-                        <Typography sx={{fontWeight:'bold'}}>Categorias</Typography>
-                        </AccordionSummary>
-                        <AccordionDetails>
-                        <Typography sx={{display:'flex',flexDirection:'column'}}> 
-                        <FormControlLabel  control={<Checkbox />} label="Camisas" />
-                        <FormControlLabel  control={<Checkbox />} label="Moletom" />
-                        <FormControlLabel  control={<Checkbox />} label="Jeans" />
-                        <FormControlLabel  control={<Checkbox />} label="Calças" />
-                        <FormControlLabel  control={<Checkbox />} label="Short" />
-                        <FormControlLabel  control={<Checkbox />} label="Sports" />
-                        </Typography>
-                        </AccordionDetails>
-                    </Accordion>
-                    <Accordion defaultExpanded>
-                        <AccordionSummary
-                        expandIcon={<ExpandMoreIcon />}
-                        aria-controls="panel1-content"
-                        id="panel2-header"
-                        >
-                        <Typography sx={{fontWeight:'bold'}}>Procure por Categorias</Typography>
-                        </AccordionSummary>
-                        <AccordionDetails>
-                        <Stack spacing={2} sx={{ width: '30ch' }}>
-                            <Autocomplete
-                                id="free-solo-demo"
-                                freeSolo
-                                options={data.map((option: any) => option.name)}
-                                renderInput={(params) => (
-                                <TextField
-                                    {...params}
-                                    variant="outlined"
-                                    color="primary"
-                                    sx={{
-                                    '& .MuiOutlinedInput-root': {
-                                        borderRadius: '22px',
-                                        backgroundColor: '#CDCDE3',
-                                        '& input': {
-                                        height: '10px',
-                                        paddingBottom: '50px',
-                                        },
-                                    },
-                                    }}
-                                    InputProps={{
-                                    ...params.InputProps,
-                                    startAdornment: (
-                                        <InputAdornment position="start">
-                                        <SearchIcon />
-                                        </InputAdornment>
-                                    ),
-                                    }}
-                                />
-                                )}
-                            onInputChange={(event, newInputValue) => {
-                                console.log(newInputValue); 
-                            }}
-                            />
-                            </Stack>
-                        </AccordionDetails>
-                    </Accordion>
+                        <Accordion defaultExpanded>
+                            <AccordionSummary
+                                expandIcon={<ExpandMoreIcon />}
+                                aria-controls="panel1-content"
+                                id="panel1-header"
+                            >
+                                <Typography sx={{ fontWeight: 'bold' }}>Categorias</Typography>
+                            </AccordionSummary>
+                            <AccordionDetails>
+                                <Typography sx={{ display: 'flex', flexDirection: 'column' }}>
+                                    <FormControlLabel
+                                        control={<Checkbox name="Camisas" onChange={handleCategoryChange} />}
+                                        label="Camisas"
+                                    />
+                                    <FormControlLabel
+                                        control={<Checkbox name="Moletom" onChange={handleCategoryChange} />}
+                                        label="Moletom"
+                                    />
+                                    <FormControlLabel
+                                        control={<Checkbox name="Jeans" onChange={handleCategoryChange} />}
+                                        label="Jeans"
+                                    />
+                                    <FormControlLabel
+                                        control={<Checkbox name="Calças" onChange={handleCategoryChange} />}
+                                        label="Calças"
+                                    />
+                                    <FormControlLabel
+                                        control={<Checkbox name="Short" onChange={handleCategoryChange} />}
+                                        label="Short"
+                                    />
+                                    <FormControlLabel
+                                        control={<Checkbox name="Sports" onChange={handleCategoryChange} />}
+                                        label="Sports"
+                                    />
+                                </Typography>
+                            </AccordionDetails>
+                        </Accordion>
+                        <Accordion defaultExpanded>
+                            <AccordionSummary
+                                expandIcon={<ExpandMoreIcon />}
+                                aria-controls="panel2-content"
+                                id="panel2-header"
+                            >
+                                <Typography sx={{ fontWeight: 'bold' }}>Procure por Categorias</Typography>
+                            </AccordionSummary>
+                            <AccordionDetails>
+                                <Stack spacing={2} sx={{ width: '30ch' }}>
+                                    <Autocomplete
+                                        id="free-solo-demo"
+                                        freeSolo
+                                        options={mockProducts.map((product) => product.name)}
+                                        renderInput={(params) => (
+                                            <TextField
+                                                {...params}
+                                                variant="outlined"
+                                                color="primary"
+                                                sx={{
+                                                    '& .MuiOutlinedInput-root': {
+                                                        borderRadius: '22px',
+                                                        backgroundColor: '#CDCDE3',
+                                                    },
+                                                }}
+                                                InputProps={{
+                                                    ...params.InputProps,
+                                                    startAdornment: (
+                                                        <InputAdornment position="start">
+                                                            <SearchIcon />
+                                                        </InputAdornment>
+                                                    ),
+                                                }}
+                                            />
+                                        )}
+                                        onInputChange={(event, newInputValue) => {
+                                            setSearchTerm(newInputValue);
+                                        }}
+                                    />
+                                </Stack>
+                            </AccordionDetails>
+                        </Accordion>
                     </div>
-            </div>
-            <div className="flex flex-row item-center justify-around w-[1200px]">
-                <div className="flex flex-col gap-10">
-                <SuperCard/>
-                <SuperCard/>
                 </div>
-                <div className="flex flex-col gap-10">
-                <SuperCard/>
-                <SuperCard/>
-                </div>
-                <div className="flex flex-col gap-10">
-                <SuperCard/>
-                <SuperCard/>
+                <div className="flex-1">
+                    <div className="grid grid-cols-3 gap-10">
+                        {filteredProducts.map((product) => (
+                            <SuperCard key={product.id} product={product} />
+                        ))}
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-    )
+    );
 }

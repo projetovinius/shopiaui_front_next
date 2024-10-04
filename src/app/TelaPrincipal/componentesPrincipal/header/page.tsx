@@ -154,12 +154,16 @@ export default function Header() {
       <ThemeProvider theme={theme}>
         <div className='w-[15%] flex flex-row items-center justify-baseline'>
           <div className='mt-1 ml-2'>
-            <Image
-            src='/Logo.png'
-            width={130}
-            height={100}
-            alt='logo'
-            />
+            <Link
+              href={'/'}
+            >
+              <Image
+              src='/Logo.png'
+              width={130}
+              height={100}
+              alt='logo'
+              />
+            </Link>
           </div>
         </div>
       <div className='w-[85%] flex flex-row items-center justify-between'>
