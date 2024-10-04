@@ -1,7 +1,6 @@
 'use client'
 
 import { CreatedProductForm } from "@/app/configVendedor/componentes/formProduto/post-produto";
-import Header from "@/app/TelaPrincipal/header/page";
 import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 
@@ -28,7 +27,7 @@ export default function ProductDetails({params}: ProductDatailsProps) {
 
     return (
         <div className="product-details-container w-screen mx-auto ">
-          <Header/>
+          
           
           <div className="top-section flex flex-col lg:flex-row">
             <div className="product-image w-full lg:w-1/2">
