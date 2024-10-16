@@ -6,7 +6,7 @@ import TextField from '@mui/material/TextField';
 import { Button, InputAdornment } from '@mui/material';
 import useSigninForm from '@/hooks/useSigninForm';
 
-  export const poppins = Poppins({
+  const poppins = Poppins({
     subsets: ['latin'],
     weight: '400',
   })

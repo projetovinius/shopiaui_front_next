@@ -15,7 +15,7 @@ export const categoriesData = [
     {
         id:2,
         name: "Shorts",
-        img: '/Short.png'
+        img: '/short.png'
 
     },
     {

@@ -19,7 +19,8 @@ import ProductSaller from '../products_saller/page';
 import Construindo from '../construindo/page'
 import { AuthContext } from '@/contexts/AuthContext';
 import { useRouter } from 'next/navigation';
-export const poppins = Poppins({
+
+const poppins = Poppins({
   subsets: ['latin'],
   weight: ['400', '500', '700'],
 });
@@ -137,17 +138,15 @@ function DemoPageContent({ pathname }: { pathname: string }) {
     </Box>
   );
 }
-
 interface DemoProps {
- 
-  window?: () => Window;
+  // Remove window, as it is not being used anymore
 }
 
 export default function DashboardLayoutBasic(props: DemoProps) {
-  const { window } = props;
-  const routers = useRouter()
+  const routers = useRouter();
   const [pathname, setPathname] = React.useState('/singUp');
-  const {user} = React.useContext(AuthContext)
+  const { user } = React.useContext(AuthContext);
+
   const router = React.useMemo<Router>(() => {
     return {
       pathname,
@@ -155,6 +154,7 @@ export default function DashboardLayoutBasic(props: DemoProps) {
       navigate: (path) => setPathname(String(path)),
     };
   }, [pathname]);
+
   const [session, setSession] = React.useState<Session | null>({
     user: {
       name: 'Undefined',
@@ -166,31 +166,27 @@ export default function DashboardLayoutBasic(props: DemoProps) {
   const authentication = React.useMemo(() => {
     return {
       signIn: () => {
-        routers.push('/signin')
+        routers.push('/signin');
       },
       signOut: () => {
         setSession(null);
-      },  
+      },
     };
   }, []);
 
-  const demoWindow = window !== undefined ? window() : undefined;
-
   return (
-    
     <AppProvider
       session={session}
       authentication={authentication}
       navigation={NAVIGATION}
       router={router}
       theme={demoTheme}
-      window={demoWindow}
       branding={{
         logo: <img src="/white.png" alt="logo" />,
-        title:'ShoPiauí',
+        title: 'ShoPiauí',
       }}
     >
-      <DashboardLayout >
+      <DashboardLayout>
         <DemoPageContent pathname={pathname} />
       </DashboardLayout>
     </AppProvider>

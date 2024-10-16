@@ -5,8 +5,7 @@ import { Poppins } from "next/font/google"
 import useSignupSallerForm from "@/hooks/useSignupSallerForm"
 import {useForm,  } from 'react-hook-form'
 import { SallerSignupProps } from "@/types/saller_signup_model"
-
-export const poppins = Poppins({
+ const poppins = Poppins({
     subsets: ['latin'],
     weight: '400',
   })
