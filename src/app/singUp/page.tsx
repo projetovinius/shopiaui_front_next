@@ -3,7 +3,7 @@ import * as React from 'react';
 import { Poppins } from 'next/font/google'
 import Formulario from './componentes/formulario/form';
 import GoogleButtons from './componentes/google/logGoogle';
-export const poppins = Poppins({
+ const poppins = Poppins({
   subsets: ['latin'],
   weight: '400',
 })
