@@ -25,7 +25,7 @@ export default function ProductSaller() {
 
     return (
         <div className="w-full h-full">
-            <div className="h-36 gap-6 w100%] flex flex-row items-center justify-between border rounded-md px-8">
+            <div className="h-36 gap-6 w-[100%] flex flex-row items-center justify-between border rounded-md px-8">
                 <div className="h-[80%] w-32 bg-slate-300"></div>
                 <div className="w-fit flex gap-20 flex-row items-center">
                     <p>{data[0]?.name || "Produto sem nome"}</p>

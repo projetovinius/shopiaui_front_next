@@ -13,7 +13,7 @@ import useSigninForm from '@/hooks/useSigninForm';
 
   export default function SingUpScreen() {
 
-    const {register, handleSubmit, handleOnSubmit} = useSigninForm()
+    const {register, handleSubmit, handleOnSubmit, isLoading} = useSigninForm()
     return (
       <div className='bg-[url("/Ellipse.Esquerda(12).svg")] bg-contain bg-center flex items-center justify-center w-full h-screen'>
         <main className=" w-1/2 h-[400px] flex items-center justify-center flex-col gap-8">
@@ -90,7 +90,7 @@ import useSigninForm from '@/hooks/useSigninForm';
                     textTransform: 'none'
                   }}
                 >
-                  Entrar
+                  {isLoading? "carregando..." :"Entrar"}
                 </Button>
                 <p className='text-[#324C63]'>Não possui conta? <a href='/singUp' className='font-semibold text-[#324C63]'>Crie aqui</a></p>
               </div>
