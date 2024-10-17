@@ -186,8 +186,12 @@ export default function DashboardLayoutBasic(props: DemoProps) {
         title: 'ShoPiauí',
       }}
     >
-      <DashboardLayout>
-        <DemoPageContent pathname={pathname} />
+        <DashboardLayout>
+        <Box sx={{ height: '100vh', width: '100%', display: 'flex', flexDirection: 'column', backgroundColor: 'red' }}>
+          <DemoPageContent 
+            pathname={pathname}
+          />
+        </Box>
       </DashboardLayout>
     </AppProvider>
   );
