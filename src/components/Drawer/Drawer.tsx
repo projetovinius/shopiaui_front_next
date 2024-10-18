@@ -19,6 +19,7 @@ import ListItemText from '@mui/material/ListItemText';
 import InboxIcon from '@mui/icons-material/MoveToInbox';
 import Typography from "@mui/material/Typography";
 import MailIcon from '@mui/icons-material/Mail';
+import { useRouter } from "next/navigation";
 
 const drawerWidth = 240;
 
@@ -26,27 +27,7 @@ interface AppBarProps extends MuiAppBarProps {
   open?: boolean;
 }
 
-const AppBar = styled(MuiAppBar, {
-  shouldForwardProp: (prop) => prop !== 'open',
-})<AppBarProps>(({ theme }) => ({
-  transition: theme.transitions.create(['margin', 'width'], {
-    easing: theme.transitions.easing.sharp,
-    duration: theme.transitions.duration.leavingScreen,
-  }),
-  variants: [
-    {
-      props: ({ open }) => open,
-      style: {
-        width: `calc(100% - ${drawerWidth}px)`,
-        marginLeft: `${drawerWidth}px`,
-        transition: theme.transitions.create(['margin', 'width'], {
-          easing: theme.transitions.easing.easeOut,
-          duration: theme.transitions.duration.enteringScreen,
-        }),
-      },
-    },
-  ],
-}));
+
 
 export const DrawerHeader = styled('div')(({ theme }) => ({
   display: 'flex',
@@ -58,23 +39,25 @@ export const DrawerHeader = styled('div')(({ theme }) => ({
   justifyContent: 'flex-between',
 }));
 
-export default function DrawerComponent({toggleDrawer, setOpen}: DrawerProps) {
+
+const menuItems = [
+  { text: 'Dashboard', route: 'dashboard' },
+  { text: 'Produtos', route: 'products' },
+  { text: 'Criar Produto', route: 'create_product' }
+];
+
+export default function DrawerComponent({onNavigate, toggleDrawer, setOpen}: DrawerProps) {
   const theme = useTheme();
-  // const handleDrawerOpen = () => {
-  //   setOpen(true);
-  // };
+  const router = useRouter();
+
 
   const handleDrawerClose = () => {
     setOpen(false);
   };
+
     return (
-        <Box sx={{ width: 250 }} role="presentation" onClick={() =>toggleDrawer(false)}>
+        <Box sx={{ width: 250 }} role="presentation" >
             <DrawerHeader>
-            {/* <Typography sx={{
-                  paddingRight: '15px'
-                }}>
-                    Area de Trabalho
-                </Typography> */}
               <Box
                   sx={{
                     display: 'flex',
@@ -104,9 +87,9 @@ export default function DrawerComponent({toggleDrawer, setOpen}: DrawerProps) {
           </DrawerHeader>
         <Divider />
         <List>
-          {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
+          {['Conta'].map((text, index) => (
             <ListItem key={text} disablePadding>
-              <ListItemButton>
+              <ListItemButton >
                 <ListItemIcon>
                   {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
                 </ListItemIcon>
@@ -117,16 +100,16 @@ export default function DrawerComponent({toggleDrawer, setOpen}: DrawerProps) {
         </List>
         <Divider />
         <List>
-          {['All mail', 'Trash', 'Spam'].map((text, index) => (
-            <ListItem key={text} disablePadding>
-              <ListItemButton>
-                <ListItemIcon>
-                  {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-                </ListItemIcon>
-                <ListItemText primary={text} />
-              </ListItemButton>
-            </ListItem>
-          ))}
+        {menuItems.map((item, index) => (
+          <ListItem key={item.text} disablePadding>
+            <ListItemButton  onClick={() => onNavigate(item.route)}>
+              <ListItemIcon>
+                {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
+              </ListItemIcon>
+              <ListItemText primary={item.text} />
+            </ListItemButton>
+          </ListItem>
+        ))}
         </List>
       </Box>
     )
