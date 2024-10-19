@@ -115,8 +115,7 @@ function exibContent({ pathname }: { pathname: string }){
           return <ProductSaller/>; 
       
       default:
-       return 'pagina não encontrada'
-
+        return 'pagina não encontrada'
   }
 }
 
@@ -138,11 +137,9 @@ function DemoPageContent({ pathname }: { pathname: string }) {
     </Box>
   );
 }
-interface DemoProps {
-  // Remove window, as it is not being used anymore
-}
 
-export default function DashboardLayoutBasic(props: DemoProps) {
+
+export default function DashboardLayoutBasic() {
   const routers = useRouter();
   const [pathname, setPathname] = React.useState('/singUp');
   const { user } = React.useContext(AuthContext);
@@ -186,8 +183,12 @@ export default function DashboardLayoutBasic(props: DemoProps) {
         title: 'ShoPiauí',
       }}
     >
-      <DashboardLayout>
-        <DemoPageContent pathname={pathname} />
+        <DashboardLayout>
+        <Box sx={{ height: '100vh', width: '100%', display: 'flex', flexDirection: 'column', backgroundColor: 'red' }}>
+          <DemoPageContent 
+            pathname={pathname}
+          />
+        </Box>
       </DashboardLayout>
     </AppProvider>
   );

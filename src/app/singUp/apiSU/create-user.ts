@@ -17,6 +17,6 @@ export async function createUser({email, password }: UsersInfos){
       const errorData = await response.json();
       throw new Error(`Erro: ${errorData.message || 'Erro ao criar usuário'}`);
     }
-      return await response.json();
+    return await response.json();
    
 }
