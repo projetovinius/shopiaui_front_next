@@ -43,7 +43,7 @@ export const DrawerHeader = styled('div')(({ theme }) => ({
 const menuItems = [
   { text: 'Dashboard', route: 'dashboard' },
   { text: 'Produtos', route: 'products' },
-  { text: 'Criar Produto', route: 'create_product' }
+  { text: 'Criar Produto', route: 'saller_add_product' }
 ];
 
 export default function DrawerComponent({onNavigate, toggleDrawer, setOpen}: DrawerProps) {

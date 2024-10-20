@@ -1,22 +1,20 @@
 import { createProductApi } from "@/api/post/createProductApi";
-import { CreatedProductForm } from "@/app/configVendedor/componentes/formProduto/post-produto";
+import { CreatedProductForm } from "@/app/configVendedor/componentes/form_produto/formProduct";
 import { QueryClient, useMutation } from "@tanstack/react-query";
 
-const queryClient = new QueryClient()
-export default function useCreateProductMutation(token: string|null) {
-    return  useMutation(
-        {
-            mutationFn: (data: CreatedProductForm) => {
-                console.log(data)
-                return createProductApi(data, token)
-            },
-            onSuccess: (response) => {
-                queryClient.invalidateQueries({queryKey: ['product']})
-                return response
-            },
-            onError: (error) => {
-                console.log(error)
-            }
-        }
-    )
-};
+const queryClient = new QueryClient();
+export default function useCreateProductMutation(token: string | null) {
+  return useMutation({
+    mutationFn: (data: CreatedProductForm) => {
+      console.log(data);
+      return createProductApi(data, token);
+    },
+    onSuccess: (response) => {
+      queryClient.invalidateQueries({ queryKey: ["product"] });
+      return response;
+    },
+    onError: (error) => {
+      console.log(error);
+    },
+  });
+}

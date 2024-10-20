@@ -7,6 +7,7 @@ import DrawerComponent, { DrawerHeader } from "@/components/Drawer/Drawer";
 import { styled } from '@mui/material/styles';
 import Typography from "@mui/material/Typography";
 import SallerDashBoard from "../saller_dashboard/page";
+import HorizontalLinearStepper from "../configVendedor/componentes/progress/progress";
 
 const drawerWidth = 240;
 
@@ -38,9 +39,9 @@ export default function SallerWorkArea() {
       case "dashboard":
         return <SallerDashBoard />;
       case "products":
-        return <Typography>Em construção: Produtos</Typography>; // Exemplo de conteúdo
-      case "create_product":
-        return <Typography>Em construção: Criar Produto</Typography>; // Exemplo de conteúdo
+        return <Typography>Em construção: Produtos</Typography>;
+      case "saller_add_product":
+        return <HorizontalLinearStepper/> 
       default:
         return <SallerDashBoard />;
     }
@@ -48,7 +49,7 @@ export default function SallerWorkArea() {
 
   const handlePageChange = (page: string) => {
     setCurrentPage(page);
-    setOpen(false); // Fecha o Drawer ao selecionar
+    setOpen(false); 
   };
 
   const toggleDrawer = (newOpen: boolean) => {
@@ -62,14 +63,14 @@ export default function SallerWorkArea() {
         sx={{
           display: 'flex',
           height: '100vh',  
-          flexDirection: 'row', // Corrigido para 'row'
+          flexDirection: 'row',
         }}
       >
         <Drawer 
           variant="persistent"
           sx={{
-            width: drawerWidth, // Defina a largura do Drawer
-            flexShrink: 0, // Impede que o Drawer encolha
+            width: drawerWidth, 
+            flexShrink: 0, 
           }} 
           open={open} 
           onClose={() => toggleDrawer(false)}
