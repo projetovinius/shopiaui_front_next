@@ -184,7 +184,7 @@ export default function DashboardLayoutBasic() {
       }}
     >
         <DashboardLayout>
-        <Box sx={{ height: '100vh', width: '100%', display: 'flex', flexDirection: 'column', backgroundColor: 'red' }}>
+        <Box sx={{ height: '100vh', width: '100%', display: 'flex', flexDirection: 'column'}}>
           <DemoPageContent 
             pathname={pathname}
           />

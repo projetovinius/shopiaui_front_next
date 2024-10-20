@@ -5,6 +5,7 @@ import { PieChart } from "@mui/x-charts/PieChart";
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 import StoreIcon from "@mui/icons-material/Store";
 import HomeIcon from "@mui/icons-material/Home";
+import { useRouter } from "next/navigation";
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -12,6 +13,8 @@ const poppins = Poppins({
 });
 
 export default function SallerDashBoard() {
+    const router = useRouter()
+
   return (
     <Box
       sx={{
@@ -63,6 +66,7 @@ export default function SallerDashBoard() {
         >
           {/* Adicionar produtos */}
           <Button
+            onClick={() => router.push('')}
             sx={{
               boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
               padding: "24px",

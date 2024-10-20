@@ -22,5 +22,4 @@ export async function createdProduct({name,description,price,quantity}: Products
           throw new Error(`Erro: ${errorData.message || 'Erro ao criar produto'}`);
         }
           return await response.json();
-       
 }

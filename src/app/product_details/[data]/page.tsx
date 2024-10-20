@@ -1,6 +1,6 @@
 "use client";
 
-import { CreatedProductForm } from "@/app/configVendedor/componentes/formProduto/post-produto";
+import { CreatedProductForm } from "@/app/configVendedor/componentes/form_produto/formProduct";
 import Header from "@/app/TelaPrincipal/componentesPrincipal/header/Header";
 import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
