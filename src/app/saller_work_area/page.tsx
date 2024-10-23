@@ -8,6 +8,7 @@ import { styled } from '@mui/material/styles';
 import Typography from "@mui/material/Typography";
 import SallerDashBoard from "../saller_dashboard/page";
 import HorizontalLinearStepper from "../configVendedor/componentes/progress/progress";
+import ProductSaller from "../products_saller/page";
 
 const drawerWidth = 240;
 
@@ -39,7 +40,7 @@ export default function SallerWorkArea() {
       case "dashboard":
         return <SallerDashBoard />;
       case "products":
-        return <Typography>Em construção: Produtos</Typography>;
+        return <ProductSaller/>;
       case "saller_add_product":
         return <HorizontalLinearStepper/> 
       default:

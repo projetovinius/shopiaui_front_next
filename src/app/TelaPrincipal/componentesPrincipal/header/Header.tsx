@@ -197,7 +197,7 @@ export default function Header() {
               />
             )}
           onInputChange={(event, newInputValue) => {
-            console.log(newInputValue); // Para ver o que está sendo digitado
+            console.log(newInputValue); 
           }}
         />
         </Stack>

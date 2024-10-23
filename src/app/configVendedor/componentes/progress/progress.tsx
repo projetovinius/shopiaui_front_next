@@ -7,7 +7,7 @@ import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import CreatedTypeProduct from "../form_category/formCategory";
 import FormProduto from "../form_produto/formProduct";
-import { Stack } from "@mui/material";
+import { Divider, Stack } from "@mui/material";
 
 const steps = ["Categoria", "Produto"];
 
@@ -154,7 +154,7 @@ export default function HorizontalLinearStepper() {
               textTransform: "none",
               fontSize: "1.2rem",
             }}
-          >
+            >
             Ver Produtos
           </Button>
           </div>
